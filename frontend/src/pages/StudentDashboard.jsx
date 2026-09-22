@@ -74,7 +74,13 @@ function StudentDashboard()  {
       })
       .catch((error) => {
         console.error(error);
-        toast.error("Unable to load students");
+        if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("username");
+          navigate("/");
+        } else {
+          toast.error("Unable to load students");
+        }
       })
       .finally(() => {
         setLoading(false);

@@ -9,12 +9,10 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("access_token");
-
-    if (token) {
-      navigate("/dashboard");
-    }
-  }, [navigate]);
+    // Clear any stale token when opening login page so user always sees clean login form
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("username");
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
