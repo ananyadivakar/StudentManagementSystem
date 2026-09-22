@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { useNavigate } from "react-router-dom";
+import StudentChart from "../components/StudentChart";
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL ||
