@@ -218,9 +218,11 @@ function StudentDashboard()  {
   ) || 1;
 const courseCount = {};
 
-students.forEach((student) => {
-  courseCount[student.course] =
-    (courseCount[student.course] || 0) + 1;
+(students || []).forEach((student) => {
+  if (student && student.course) {
+    courseCount[student.course] =
+      (courseCount[student.course] || 0) + 1;
+  }
 });
 
 

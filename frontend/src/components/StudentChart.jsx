@@ -27,12 +27,14 @@ ChartJS.register(
   Legend
 );
 
-function StudentChart({ students }) {
+function StudentChart({ students = [] }) {
   const courseCount = {};
 
-  students.forEach((student) => {
-    courseCount[student.course] =
-      (courseCount[student.course] || 0) + 1;
+  (students || []).forEach((student) => {
+    if (student && student.course) {
+      courseCount[student.course] =
+        (courseCount[student.course] || 0) + 1;
+    }
   });
 
   const labels = Object.keys(courseCount);
