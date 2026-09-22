@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-import StudentChart from "../components/StudentChart";
+import { useNavigate } from "react-router-dom";
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "https://student-management-backend-11t2.onrender.com";
@@ -25,6 +25,7 @@ const getAuthConfig = () => {
 };
 
 function StudentDashboard()  {
+  const navigate = useNavigate();
   const [students, setStudents] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -47,11 +48,11 @@ function StudentDashboard()  {
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (!token) {
-      window.location.href = "/";
+      navigate("/");
       return;
     }
     fetchStudents();
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     localStorage.setItem(
@@ -227,7 +228,7 @@ students.forEach((student) => {
   if (window.confirm("Logout from dashboard?")) {
     localStorage.removeItem("access_token");
     localStorage.removeItem("username");
-    window.location.href = "/";
+    navigate("/");
   }
 };
 const exportCSV = () => {

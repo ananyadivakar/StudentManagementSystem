@@ -1,18 +1,20 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../App.css";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
 
     if (token) {
-      window.location.href = "/dashboard";
+      navigate("/dashboard");
     }
-  }, []);
+  }, [navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -42,7 +44,7 @@ function Login() {
 
       alert("Login Successful");
 
-      window.location.href = "/dashboard";
+      navigate("/dashboard");
 
     } catch (error) {
       if (error.response && error.response.status === 401) {
