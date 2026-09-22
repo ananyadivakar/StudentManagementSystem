@@ -42,8 +42,6 @@ function Login() {
         username
       );
 
-      alert("Login Successful");
-
       navigate("/dashboard");
 
     } catch (error) {
