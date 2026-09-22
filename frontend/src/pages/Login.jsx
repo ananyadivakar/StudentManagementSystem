@@ -22,7 +22,9 @@ function Login() {
     try {
       const API_BASE_URL =
         import.meta.env.VITE_API_BASE_URL ||
-        "https://student-management-backend-11t2.onrender.com";
+        (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+          ? "http://127.0.0.1:8000"
+          : "https://student-management-backend-11t2.onrender.com");
 
       const response = await axios.post(
         `${API_BASE_URL}/api/token/`,
