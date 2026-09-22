@@ -15,35 +15,40 @@ function Login() {
   }, []);
 
   const handleLogin = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/token/",
-        {
-          username,
-          password,
-        }
-      );
+  try {
+    const API_BASE_URL =
+      import.meta.env.VITE_API_BASE_URL ||
+      "http://127.0.0.1:8000";
 
-      localStorage.setItem(
-        "access_token",
-        response.data.access
-      );
-      localStorage.setItem(
-        "username",
-        username
-      );
+    const response = await axios.post(
+      `${API_BASE_URL}/api/token/`,
+      {
+        username,
+        password,
+      }
+    );
 
-      alert("Login Successful");
+    localStorage.setItem(
+      "access_token",
+      response.data.access
+    );
 
-      window.location.href = "/dashboard";
+    localStorage.setItem(
+      "username",
+      username
+    );
 
-    } catch (error) {
-      alert("Invalid Credentials");
-      console.error(error);
-    }
-  };
+    alert("Login Successful");
+
+    window.location.href = "/dashboard";
+
+  } catch (error) {
+    alert("Invalid Credentials");
+    console.error(error);
+  }
+};
 
  return (
   <div className="login-container">
