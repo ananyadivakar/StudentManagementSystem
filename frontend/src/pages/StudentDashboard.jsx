@@ -10,7 +10,7 @@ import autoTable from "jspdf-autotable";
 import StudentChart from "../components/StudentChart";
 
 const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
+  import.meta.env.VITE_API_BASE_URL || "https://student-management-backend-11t2.onrender.com";
 
 const getAuthConfig = () => {
   const token = localStorage.getItem("access_token");

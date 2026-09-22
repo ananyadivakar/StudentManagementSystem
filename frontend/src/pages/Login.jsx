@@ -15,40 +15,44 @@ function Login() {
   }, []);
 
   const handleLogin = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
-    const API_BASE_URL =
-      import.meta.env.VITE_API_BASE_URL ||
-      "http://127.0.0.1:8000";
+    try {
+      const API_BASE_URL =
+        import.meta.env.VITE_API_BASE_URL ||
+        "https://student-management-backend-11t2.onrender.com";
 
-    const response = await axios.post(
-      `${API_BASE_URL}/api/token/`,
-      {
-        username,
-        password,
+      const response = await axios.post(
+        `${API_BASE_URL}/api/token/`,
+        {
+          username,
+          password,
+        }
+      );
+
+      localStorage.setItem(
+        "access_token",
+        response.data.access
+      );
+
+      localStorage.setItem(
+        "username",
+        username
+      );
+
+      alert("Login Successful");
+
+      window.location.href = "/dashboard";
+
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        alert("Invalid Credentials");
+      } else {
+        alert("Unable to reach backend server. Please make sure the backend is running.");
       }
-    );
-
-    localStorage.setItem(
-      "access_token",
-      response.data.access
-    );
-
-    localStorage.setItem(
-      "username",
-      username
-    );
-
-    alert("Login Successful");
-
-    window.location.href = "/dashboard";
-
-  } catch (error) {
-    alert("Invalid Credentials");
-    console.error(error);
-  }
-};
+      console.error(error);
+    }
+  };
 
  return (
   <div className="login-container">
